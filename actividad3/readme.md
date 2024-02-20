@@ -26,7 +26,10 @@ para poder crear un systemd primero debemos crear nuestro script. <br>
 **Archivo:** saludo.sh
 ```bash
 #!/bin/bash
-echo "Hola, este es un saludo ejecutado el: $(date)"
+while true; do
+    echo "Hola, este es un saludo ejecutado el: $(date)"
+    sleep 1
+done
 ```
 
 <br>
@@ -76,7 +79,8 @@ sudo systemctl enable saludo.service
 Para ver la salida del servicio podemos ejecutar el siguiente comando que es para mostrar el registro del servicio y asi poder verificar la salida de nuestro script
 
 ```
-sudo journalctl -u saludo.service
+sudo systemctl status saludo.service
+
 ```
 <br>
 
@@ -86,4 +90,8 @@ sudo journalctl -u saludo.service
 feb 19 17:15:33 eduardo-NBLK-WAX9X systemd[1]: Started saludo.service - Servicio de Saludo.
 feb 19 17:15:33 eduardo-NBLK-WAX9X saludo.sh[4954]: Hola, este es un saludo ejecutado el: lun 19 feb 2024 17:15:33 CST
 feb 19 17:15:33 eduardo-NBLK-WAX9X systemd[1]: saludo.service: Deactivated successfully.
+```
+Para detener el servicio se debe usar el siguiente comando:
+```
+sudo systemctl stop saludo.service
 ```
